@@ -2,8 +2,7 @@
 
 # Display the number of tables 
 def display_tables(zones):
-    print("Welcome to Smart Hawker Centre") # Welcome message to the user/customer
-
+    
     # Used to calculate the most vacant (best) zone
     best_zone_name = "" 
     best_zone_count = 0
