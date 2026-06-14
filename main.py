@@ -1,5 +1,6 @@
-import module1
-import module2
+import module1_tables
+import module2_crowds
+## MY EYES HURT READING THIS CODE HELP
 ## CURRENT PROGRESS: 
 ## MODULE 1 AND 2 ARE MOSTLY COMPLETE.
 ## NEED TO FIX THE USER INTERFACE A BIT MESSY
@@ -25,15 +26,17 @@ while True:
     ## WILL BE FIXED IN MODULE 3.
     if enter_or_exit == "1":
         # Display the crowd indicator and ask them for their preferred zone
-        module1.display_tables(zones)
-        module2.crowd_indicator(max_tables, zones)
+        module1_tables.display_tables(zones)
+        module2_crowds.crowd_indicator(max_tables, zones)
         preferred_zone = input("Enter your preferred zone (A, B, C): ")
         table_size = int(input("Enter your table size (2, 4, 6, 8): "))
-        module1.occupy_table(zones, preferred_zone, table_size)
+        module1_tables.occupy_table(zones, preferred_zone, table_size)
     elif enter_or_exit == "2":
         zone = input("Enter the zone you were at (A, B, C): ")
         table_size = int(input("Enter your table size (2, 4, 6, 8): "))
-        module1.unoccupy_table(zones, max_tables, zone, table_size)
+        module1_tables.unoccupy_table(zones, max_tables, zone, table_size)
     elif enter_or_exit == "secretkey": # this is for employees when they close the application.
         print("Store closed.")
-        break                          
+        break
+    else:
+        print("Invalid Option!")              
