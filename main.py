@@ -4,6 +4,7 @@ import module2_crowds
 ## CURRENT PROGRESS: 
 ## MODULE 1 AND 2 ARE MOSTLY COMPLETE.
 ## NEED TO FIX THE USER INTERFACE A BIT MESSY
+secretkey = "mysecret123"
 zones = {
     "A": {2: 5, 4: 8, 6: 3, 8: 2},
     "B": {2: 4, 4: 6, 6: 2, 8: 1},
@@ -19,9 +20,10 @@ max_tables = {
 while True:
     # welcome message
     print("\nWelcome to Smart Hawker Centre!")
-    enter_or_exit = input("Please pick an option: \n\
+    while (enter_or_exit := input("Please pick an option: \n\
 (1) Enter \n\
-(2) Exit \n")
+(2) Exit \n")) not in ("1", "2", secretkey):
+        print("Invalid Input") # Using the walrus operator, I can assign enter_or_exit to input, before checking if it is in a tuple of ("1", "2")
     ## FOR NOW, WE ASSUME THE TABLES WILL NEVER GO EMPTY 
     ## WILL BE FIXED IN MODULE 3.
     if enter_or_exit == "1":
@@ -35,7 +37,7 @@ while True:
         zone = input("Enter the zone you were at (A, B, C): ")
         table_size = int(input("Enter your table size (2, 4, 6, 8): "))
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size)
-    elif enter_or_exit == "secretkey": # this is for employees when they close the application.
+    elif enter_or_exit == secretkey: # this is for employees when they close the application.
         print("Store closed.")
         break
     else:
