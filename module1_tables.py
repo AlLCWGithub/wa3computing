@@ -37,16 +37,16 @@ def display_tables(zones):
 def occupy_table(zones, zone, table_size): 
     # These if-statements prevents the user from trying to trick the system
     if zone not in zones:
-        print("Invalid zone.")
+        print("Invalid zone.\n")
         return # ends the function
     if table_size not in zones[zone]:
-        print("Invalid table size.")
+        print("Invalid table size.\n")
         return # ends the function
 
     # Check if table size has vacancy
     if zones[zone][table_size] > 0: # if there is vacant seats for that table size, allow the customer to take their seat
         zones[zone][table_size] -= 1 # and minus one vacancy
-        print(f"Welcome in to Smart Hawker Centre! \nZone: {zone} \nTable size: {table_size}") # welcome message to customer
+        print(f"Welcome into Smart Hawker Centre! \nZone: {zone} \nTable size: {table_size}") # welcome message to customer
     else:
         print(f"No table for {table_size} available in zone {zone}.") # otherwise print error
 

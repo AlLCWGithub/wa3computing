@@ -18,7 +18,7 @@ max_tables = {
 
 while True:
     # welcome message
-    print("Welcome to Smart Hawker Centre!")
+    print("\nWelcome to Smart Hawker Centre!")
     enter_or_exit = input("Please pick an option: \n\
 (1) Enter \n\
 (2) Exit \n")
