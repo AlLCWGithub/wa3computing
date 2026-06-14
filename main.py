@@ -26,7 +26,7 @@ while True:
     if enter_or_exit == "1":
         # Display the crowd indicator and ask them for their preferred zone
         module1.display_tables(zones)
-        module2.crowd_indicator(zones, max_tables)
+        module2.crowd_indicator(max_tables, zones)
         preferred_zone = input("Enter your preferred zone (A, B, C): ")
         table_size = int(input("Enter your table size (2, 4, 6, 8): "))
         module1.occupy_table(zones, preferred_zone, table_size)
