@@ -64,6 +64,6 @@ def unoccupy_table(zones, max_tables, zone, table_size):
     # Ensure count never exceeds original amount
     if zones[zone][table_size] < max_tables[zone][table_size]: # if the current number of tables is less than the total number of tables,
         zones[zone][table_size] += 1 # add one vacancy to and successfully let customer out
-        print(f"Thank you for visiting Smart Hawker Centre!")
+        print("Thank you for visiting Smart Hawker Centre!")
     else:
-        print("Error: Count cannot exceed maximum.") # otherwise print error
+        print(f"All {table_size}-person tables in zone {zone} are already empty. Please try again!") # otherwise print error
