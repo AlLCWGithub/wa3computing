@@ -4,7 +4,7 @@ import module2_crowds
 ## CURRENT PROGRESS: 
 ## MODULE 1 AND 2 ARE MOSTLY COMPLETE.
 ## NEED TO FIX THE USER INTERFACE A BIT MESSY
-secretkey = "mysecret123"
+secretkey = "secretkey"
 zones = {
     "A": {2: 5, 4: 8, 6: 3, 8: 2},
     "B": {2: 4, 4: 6, 6: 2, 8: 1},
