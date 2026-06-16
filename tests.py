@@ -11,7 +11,8 @@ import module3_queue
 #   occupancy_percentage -> max_tables dictionary, zones dictionary
 #   crowd_indicator -> max_tables dictionary, zones dictionary
 # Module 3:
-#   join_queue -> queue dictionary, preferred table size and queue_numbers[table_size] -> corresponds to next_queue_number
+#   join_queue -> queue dictionary, preferred table size and queue_numbers[table_size]  
+#                 where queue_numbers[table_size] corresponds to next_queue_number
 #   call_next_customer -> zones dictionary, zone of previous customer, queue dictionary, table_size
 #   count_table_type -> max_tables dictionary
 #   waiting_time -> tables_per_table_type dictionary, which is the return value of count_table_type,
