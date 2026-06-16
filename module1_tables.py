@@ -1,5 +1,8 @@
 # Module 1: Table Counter and Table Zones
 
+# Import Module 3 for the updating of queue when a table is unoccupied:
+from module3_queue import call_next_customer
+
 # Display the number of tables 
 def display_tables(zones):
     
@@ -51,8 +54,9 @@ def occupy_table(zones, zone, table_size):
         print(f"No table for {table_size} available in zone {zone}.") # otherwise print error
 
 # Unoccupy a table
-# The function requires the zones dictionary, the fixed max tables dictionary, the customer's table details (zone + table size)
-def unoccupy_table(zones, max_tables, zone, table_size):
+# The function requires the zones dictionary, the fixed max tables dictionary, 
+# the customer's table details (zone + table size), and queue dictionary (for module3)
+def unoccupy_table(zones, max_tables, zone, table_size, queue):
     # These if-statements prevents the user from trying to trick the system
     if zone not in zones:
         print("Invalid zone.")
@@ -65,5 +69,7 @@ def unoccupy_table(zones, max_tables, zone, table_size):
     if zones[zone][table_size] < max_tables[zone][table_size]: # if the current number of tables is less than the total number of tables,
         zones[zone][table_size] += 1 # add one vacancy to and successfully let customer out
         print("Thank you for visiting Smart Hawker Centre!")
+        if zones[zone][table_size] == 1: # MODULE 3: if the table was previously full but now is vacant, call the next number.
+            call_next_customer(zones, zone, queue, table_size)
     else:
         print(f"All {table_size}-person tables in zone {zone} are already empty. Please try again!") # otherwise print error
