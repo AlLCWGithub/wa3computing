@@ -119,4 +119,3 @@ while True:
     elif enter_or_exit == secretkey: # this is for employees when they close the application.
         print("Store closed.")
         break
-         
