@@ -4,7 +4,7 @@ def join_queue(queue, table_size, next_queue_number):
     queue[table_size].append(next_queue_number) # append the queue number into the queue dictionary
 
     print(f"Queue Number {next_queue_number} added to {table_size}-seater queue")
-    return next_queue_number + 1 # this increments the next queue number.
+    return next_queue_number + 1 # this increments the next queue number for the next customer
 
 # Calls next customer
 # How this function works:
@@ -15,14 +15,23 @@ def join_queue(queue, table_size, next_queue_number):
 # This function requires the zones dictionary and zone + table_size of the unoccupied table
 # because it needs to change the dictionary when the next person comes in.
 
-def call_next_customer(zones, zone, queue, table_size):
+def call_next_customer(zones, zone, priority_queue, queue, table_size):
 
-    if len(queue[table_size]) == 0: 
+    if len(priority_queue[table_size]) == 0 and len(queue[table_size]) == 0: 
     # this would happen when the table_size was previously full and someone unoccupy the table,
     # causing this function to run.
     # but if there is no queue for that table size then we just do nothing.
         return
-    else:
+    elif len(priority_queue[table_size]) != 0:
+        customer_number = priority_queue[table_size][0] # assigns the current customer to be called
+        # let the customer queueing in
+        print(f"\nNow serving Priority Queue Number {customer_number}")
+        # then remove them from the queue
+        priority_queue[table_size].pop(0)
+
+        # this means that the customer queueing has replaced the person who exited.
+        zones[zone][table_size] -= 1 
+    else: # else it means there is no one in the priority queue so carry on with normal queue
         customer_number = queue[table_size][0] # assigns the current customer to be called
         # let the customer queueing in
         print(f"\nNow serving Queue Number {customer_number}")
@@ -54,9 +63,9 @@ def count_table_type(max_tables):
 # If the queue is 10, then the 10th person would wait around (10 / 10) * 30 = 30 minutes
 # We use queue_length as the customer's position since this function 
 # runs right after they join the queue
-def waiting_time(tables_per_table_type, queue, table_size):
+def waiting_time(tables_per_table_type, priority_queue, queue, table_size):
     avg_dining_duration = 30 # how long a customer takes to eat in minutes
-    queue_length = len(queue[table_size]) 
+    queue_length = len(queue[table_size]) + len(priority_queue[table_size])
     total_tables_of_table_size = tables_per_table_type[table_size]
     estimated_waiting_time = (queue_length / total_tables_of_table_size) * avg_dining_duration
     estimated_waiting_time = round(estimated_waiting_time)

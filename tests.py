@@ -6,17 +6,20 @@ import module3_queue
 # Module 1:
 #   display_tables -> requires zones dictionary
 #   occupy_table -> zones dictionary, preferred zone and preferred table size
-#   unoccupy_table -> zones dictionary, max_tables dictionary, zone, table_size, queue dictionary
+#   unoccupy_table -> zones dictionary, max_tables dictionary, zone, table_size, queue dictionary, priority queue dictionary
 # Module 2:
 #   occupancy_percentage -> max_tables dictionary, zones dictionary
 #   crowd_indicator -> max_tables dictionary, zones dictionary
 # Module 3:
 #   join_queue -> queue dictionary, preferred table size and queue_numbers[table_size]  
 #                 where queue_numbers[table_size] corresponds to next_queue_number
-#   call_next_customer -> zones dictionary, zone of previous customer, queue dictionary, table_size
+#   call_next_customer -> zones dictionary, zone of previous customer, priority_queue dictionary, queue dictionary, table_size
 #   count_table_type -> max_tables dictionary
 #   waiting_time -> tables_per_table_type dictionary, which is the return value of count_table_type,
-#                   queue dictionary, table_size
+#                   priority_queue dictionary, queue dictionary, table_size
+# Module 5:
+#   join_priority_queue -> priority_queue dictionary, preferred table size and queue_numbers[table_size]
+#                          where queue_numbers[table_size] corresponds to next_queue_number
 
 
 # How this works:
