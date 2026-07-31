@@ -1,7 +1,7 @@
 # Module 1: Table Counter and Table Zones
 
 # Import Module 3 for the updating of queue when a table is unoccupied:
-from concept.module3_queue import call_next_customer
+from module3_queue import call_next_customer
 
 # Display the number of tables 
 def display_tables(zones):

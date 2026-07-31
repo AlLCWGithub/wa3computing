@@ -1,7 +1,7 @@
 # Tests modules. Run code here to test and debug
-import concept.module1_tables as module1_tables
-import concept.module2_crowds as module2_crowds
-import concept.module3_queue as module3_queue
+import module1_tables as module1_tables
+import module2_crowds as module2_crowds
+import module3_queue as module3_queue
 # Functions from modules and required args
 # Module 1:
 #   display_tables -> requires zones dictionary
