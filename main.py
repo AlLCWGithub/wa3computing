@@ -1,7 +1,7 @@
-import module1_tables
-import module2_crowds
-import module3_queue
-import module5_priority
+import module1_tables as module1_tables
+import module2_crowds as module2_crowds
+import module3_queue as module3_queue
+import module5_priority as module5_priority
 ## MY EYES HURT READING THIS CODE HELP
 
 # Variables
