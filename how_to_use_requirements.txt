@@ -1,0 +1,11 @@
+So if you dont already have a virtual environment set up, you can create one by running the following command in your terminal:
+python -m venv .venv
+.\.venv\Scripts\Activate
+python -m pip install -r requirements.txt
+
+if you already have a virtual environment set up, you can activate it by running the following command in your terminal:
+.\.venv\Scripts\Activate
+python -m pip install -r requirements.txt
+
+if you already have a virtual environment set up and you want to update the packages in your virtual environment, you can run the following command in your terminal:
+python -m pip install --upgrade -r requirements.txt
