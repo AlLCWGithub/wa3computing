@@ -1,16 +1,47 @@
 from microbit import *
 
-uart.init(baudrate=115200)
+uart.init(baudrate=9600)
+
+buffer = ""
+
+display.scroll("READY")
 
 while True:
-    try:
-        message = uart.readline()
 
-        if message:
-            message = message.decode('utf-8').strip()
-            if ":" in message:
-                command, data = message.split(":", 1)
-                if command == "SCROLL":
-                    display.scroll(data)
-    except Exception as e:
-       uart.write("ERROR: " + str(e))
+    data = uart.read() 
+
+    if data:
+
+        buffer += data.decode()
+
+        while "\n" in buffer:
+
+            line, buffer = buffer.split("\n", 1)
+
+            line = line.strip()
+
+            if "|" not in line:
+                uart.write("ERROR|Invalid packet\n")
+                continue
+
+            command, value = line.split("|", 1)
+
+            if command == "SCROLL":
+
+                display.scroll(value)
+
+                uart.write("OK|SCROLL\n")
+
+            elif command == "LED":
+
+                if value == "GREEN":
+                    display.show(Image.YES)
+
+                elif value == "RED":
+                    display.show(Image.NO)
+
+                uart.write("OK|LED\n")
+
+            else:
+
+                uart.write("ERROR|Unknown command\n")

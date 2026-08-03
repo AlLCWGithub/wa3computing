@@ -2,7 +2,9 @@ import module1_tables as module1_tables
 import module2_crowds as module2_crowds
 import module3_queue as module3_queue
 import module5_priority as module5_priority
-import serial_connection as sc
+from serial_connection import SerialConnection
+
+connection = SerialConnection()
 
 # Variables
 secretkey = "secretkey"
@@ -57,8 +59,7 @@ priority_queue = {
 while True:
     # welcome message
     print("\nWelcome to Pengu Hawker Centre!")
-    sc.send("SCROLL:Welcome to Pengu Hawker Centre!")  # Send welcome message to micro:bit
-    sc.receive().execute()
+    connection.send("SCROLL", "Welcome to Pengu Hawker Centre")
     while (enter_or_exit := input("Please pick an option: \n\
 (1) Enter \n\
 (2) Enter Priority Queue \n\

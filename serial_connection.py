@@ -1,36 +1,64 @@
 import serial
 import time
+# CHANGE TO COM4/5 
 
-ser = serial.Serial("COM5", 115200, timeout=1)
-time.sleep(2)
+# How this works:
+# The micro:bit sends data to the PC in the format "command|value\n"
 
-class Message:
+class Packet:
     def __init__(self, command, data):
         self.command = command
         self.data = data
 
-    def execute(self):
-        if self.command == None:
-            return
-        if self.command == "ERROR":
-            print("Error: ", self.data)
-    
-
-def send(message):
-    ser.write((message + "\n").encode())
-    print("[PC -> micro:bit]", message)
-
-def receive():
-    if ser.in_waiting:
-        message = ser.readline().decode().strip()
-        print("[micro:bit -> PC]", message)
-        if ":" not in message:
-            return Message(None, None)
-        command, data = message.split(":", 1)
-        return Message(command, data)
-    return Message(None, None)
+    def __repr__(self):
+        return f"Packet({self.command}, {self.data})"
 
 
-def close():
-    if ser is not None:
-        ser.close()
+class SerialConnection:
+
+    def __init__(self, port="COM4", baudrate=9600):
+
+        self.ser = serial.Serial(port, baudrate, timeout=0.1)
+
+        # Give the micro:bit time to reboot
+        time.sleep(5)
+
+        self.ser.reset_input_buffer()
+        self.ser.reset_output_buffer()
+
+        self.buffer = ""
+
+    def send(self, command, data=""):
+
+        packet = f"{command}|{data}\n"
+
+        self.ser.write(packet.encode())
+
+        print("[PC -> micro:bit]", packet.strip())
+
+    def receive(self):
+
+        data = self.ser.read(self.ser.in_waiting or 1)
+
+        if data:
+            self.buffer += data.decode(errors="ignore")
+
+        if "\n" not in self.buffer:
+            return None
+
+        line, self.buffer = self.buffer.split("\n", 1)
+
+        line = line.strip()
+
+        print("[micro:bit -> PC]", line)
+
+        if "|" not in line:
+            return Packet(line, "")
+
+        command, value = line.split("|", 1)
+
+        return Packet(command, value)
+
+    def close(self):
+
+        self.ser.close()
