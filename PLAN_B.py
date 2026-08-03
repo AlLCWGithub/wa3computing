@@ -1,0 +1,1 @@
+# if the microbit really doesnt wanna connect :( i guess we do this instead without the pc setup
