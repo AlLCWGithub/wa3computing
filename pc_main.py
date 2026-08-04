@@ -56,6 +56,8 @@ priority_queue = {
     8: []
 }
 
+validqueue = {str(k) for k in queue}
+
 while True:
     # welcome message
     print("\nWelcome to Pengu Hawker Centre!")
@@ -72,9 +74,9 @@ while True:
         # Display the tables information and crowd indicator and ask them for their preferred zone
         module1_tables.display_tables(zones)
         module2_crowds.crowd_indicator(max_tables, zones)
-        while ((preferred_zone := input("Enter your preferred zone (A, B, C): ")) not in ("A", "B", "C")):
+        while ((preferred_zone := input("Enter your preferred zone (A, B, C): ").strip().upper()) not in zones):
             print("Invalid Zone!")
-        while ((table_size := input("Enter your table size (2, 4, 6, 8): ")) not in ("2", "4", "6", "8")):
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
             print("Invalid Table Size")
         table_size = int(table_size)
 
@@ -105,8 +107,11 @@ while True:
 
 
     elif enter_or_exit == "3":
-        zone = input("Enter the zone you were at (A, B, C): ")
-        table_size = int(input("Enter your table size (2, 4, 6, 8): "))
+        while ((zone := input("Enter the zone you were at (A, B, C): ").strip().upper()) not in zones):
+            print("Invalid Zone!")
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
+            print("Invalid Table Size!")
+        table_size = int(table_size)
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
 
