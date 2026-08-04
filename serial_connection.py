@@ -16,7 +16,7 @@ class Packet:
 
 class SerialConnection:
 
-    def __init__(self, port="COM4", baudrate=9600):
+    def __init__(self, port="COM5", baudrate=9600):
 
         self.ser = serial.Serial(port, baudrate, timeout=0.1)
 

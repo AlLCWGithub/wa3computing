@@ -70,5 +70,3 @@ def waiting_time(tables_per_table_type, priority_queue, queue, table_size):
     estimated_waiting_time = (queue_length / total_tables_of_table_size) * avg_dining_duration
     estimated_waiting_time = round(estimated_waiting_time)
     print(f"Estimated waiting time: {estimated_waiting_time} minutes")
-
-    

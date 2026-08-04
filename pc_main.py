@@ -72,8 +72,11 @@ while True:
         # Display the tables information and crowd indicator and ask them for their preferred zone
         module1_tables.display_tables(zones)
         module2_crowds.crowd_indicator(max_tables, zones)
-        preferred_zone = input("Enter your preferred zone (A, B, C): ")
-        table_size = int(input("Enter your table size (2, 4, 6, 8): "))
+        while ((preferred_zone := input("Enter your preferred zone (A, B, C): ")) not in ("A", "B", "C")):
+            print("Invalid Zone!")
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ")) not in ("2", "4", "6", "8")):
+            print("Invalid Table Size")
+        table_size = int(table_size)
 
         if zones[preferred_zone][table_size] != 0: # if there is vacancy for that
             module1_tables.occupy_table(zones, preferred_zone, table_size)
