@@ -1,4 +1,4 @@
-# Module 1: Queue and Waiting Time Estimator
+# Module 3: Queue and Waiting Time Estimator
 
 def join_queue(queue, table_size, next_queue_number):
     queue[table_size].append(next_queue_number) # append the queue number into the queue dictionary
@@ -70,5 +70,3 @@ def waiting_time(tables_per_table_type, priority_queue, queue, table_size):
     estimated_waiting_time = (queue_length / total_tables_of_table_size) * avg_dining_duration
     estimated_waiting_time = round(estimated_waiting_time)
     print(f"Estimated waiting time: {estimated_waiting_time} minutes")
-
-    

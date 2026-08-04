@@ -3,6 +3,7 @@ import module2_crowds as module2_crowds
 import module3_queue as module3_queue
 import module5_priority as module5_priority
 from serial_connection import SerialConnection
+import time
 
 connection = SerialConnection()
 
@@ -10,17 +11,17 @@ connection = SerialConnection()
 secretkey = "secretkey"
 
 ## FOR TESTING OF MODULE 3, EVERY ZONE IS FULLY OCCUPIED SO THE USER HAS TO QUEUE.
-zones = {
-    "A": {2: 0, 4: 0, 6: 0, 8: 0},
-    "B": {2: 0, 4: 0, 6: 0, 8: 0},
-    "C": {2: 0, 4: 0, 6: 0, 8: 0}
-}
-# actual zones dictionary
 # zones = {
-#    "A": {2: 5, 4: 8, 6: 3, 8: 2},
-#    "B": {2: 4, 4: 6, 6: 2, 8: 1},
-#    "C": {2: 6, 4: 5, 6: 4, 8: 2}
-#}
+#     "A": {2: 0, 4: 0, 6: 0, 8: 0},
+#     "B": {2: 0, 4: 0, 6: 0, 8: 0},
+#     "C": {2: 0, 4: 0, 6: 0, 8: 0}
+# }
+
+zones = {
+   "A": {2: 5, 4: 8, 6: 3, 8: 2},
+   "B": {2: 4, 4: 6, 6: 2, 8: 1},
+   "C": {2: 6, 4: 5, 6: 4, 8: 2}
+}
 
 # Pengu's Hawker Centre Prototype Box
 # zones = {
@@ -56,15 +57,17 @@ priority_queue = {
     8: []
 }
 
+validqueue = {str(k) for k in queue}
+
 while True:
     # welcome message
     print("\nWelcome to Pengu Hawker Centre!")
-    connection.send("SCROLL", "Welcome to Pengu Hawker Centre")
+    # connection.send("SCROLL", "Welcome to Pengu Hawker Centre") kind of unnecessary and lengthy to send a scroll message to microbit, so I will just print it on the console instead.
     while (enter_or_exit := input("Please pick an option: \n\
 (1) Enter \n\
-(2) Enter Priority Queue \n\
+(2) Enter as Priority \n\
 (3) Exit \n\
-(4) Leave Queue \n")) not in ("1", "2", "3", "4", secretkey): # IGNORE OPTION 4 ONLY USED IN MODULE 6
+(4) Leave Queue \n")) not in ("1", "2", "3", "4", secretkey): # IGNORE OPTION 4 FOR NOW
         print("Invalid Input") # Using the walrus operator, I can assign enter_or_exit to input, 
                                # before checking if it is in a tuple of ("1", "2")
 
@@ -72,10 +75,18 @@ while True:
         # Display the tables information and crowd indicator and ask them for their preferred zone
         module1_tables.display_tables(zones)
         module2_crowds.crowd_indicator(max_tables, zones)
-        preferred_zone = input("Enter your preferred zone (A, B, C): ")
-        table_size = int(input("Enter your table size (2, 4, 6, 8): "))
+        while ((preferred_zone := input("Enter your preferred zone (A, B, C): ").strip().upper()) not in zones):
+            print("Invalid Zone!")
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
+            print("Invalid Table Size")
+        table_size = int(table_size)
 
         if zones[preferred_zone][table_size] != 0: # if there is vacancy for that
+            connection.send(
+                "TABLE_OCCUPIED",
+                f"{preferred_zone}|{table_size}"
+            )
+
             module1_tables.occupy_table(zones, preferred_zone, table_size)
 
         else:
@@ -102,11 +113,16 @@ while True:
 
 
     elif enter_or_exit == "3":
-        zone = input("Enter the zone you were at (A, B, C): ")
-        table_size = int(input("Enter your table size (2, 4, 6, 8): "))
+        while ((zone := input("Enter the zone you were at (A, B, C): ").strip().upper()) not in zones):
+            print("Invalid Zone!")
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
+            print("Invalid Table Size!")
+        table_size = int(table_size)
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
 
     elif enter_or_exit == secretkey: # this is for employees when they close the application.
         print("Store closed.")
         break
+
+    time.sleep(5) # this is to give the user time to read the output before clearing the screen

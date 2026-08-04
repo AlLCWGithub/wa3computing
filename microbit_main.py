@@ -32,6 +32,14 @@ while True:
 
                 uart.write("OK|SCROLL\n")
 
+            elif command == "TABLE_OCCUPIED":
+
+                zone, size = value.split("|")
+
+                display.scroll("Zone: {}, Size: {}".format(zone, size))
+
+                uart.write("OK|TABLE_OCCUPIED\n")
+
             elif command == "LED":
 
                 if value == "GREEN":
