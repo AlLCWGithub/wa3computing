@@ -30,8 +30,8 @@ def crowd_indicator(max_tables, zones):
     print(f"Occupancy: {percentage}%")
     # LED displays
     if percentage <= 40:
-        print("🟢 LOW CROWD 🟢")
+        return "LOW"
     elif percentage <= 80:
-        print("🟡 CROWDED 🟡")
+        return "CROWDED"
     else:
-        print("🔴 FULL 🔴")
+        return "FULL"

@@ -74,7 +74,11 @@ while True:
     if enter_or_exit == "1" or enter_or_exit == "2":
         # Display the tables information and crowd indicator and ask them for their preferred zone
         module1_tables.display_tables(zones)
-        module2_crowds.crowd_indicator(max_tables, zones)
+        crowd_level = module2_crowds.crowd_indicator(max_tables, zones)
+        connection.send(
+        "CROWD",
+        crowd_level
+        ) # send the crowd level to microbit to display on LED
         while ((preferred_zone := input("Enter your preferred zone (A, B, C): ").strip().upper()) not in zones):
             print("Invalid Zone!")
         while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
@@ -118,6 +122,10 @@ while True:
         while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
             print("Invalid Table Size!")
         table_size = int(table_size)
+        connection.send(
+            "THANK_YOU",
+            ""
+        ) # Send thank you for visiting message to microbit
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
 

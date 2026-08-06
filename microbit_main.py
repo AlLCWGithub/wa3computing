@@ -1,7 +1,13 @@
 from microbit import *
 import distance
+import neopixel
+# MICROBIT PROJECT
+# Pin 1: Ultrasonic Distance Sensor
+# Pin 2: LED Bulb
+# Pin 16: Fan
 
-distance_sensor = distance.DISTANCE(pin1)
+distance_sensor = distance.DISTANCE(pin1) # Distance sensor on pin 1
+np = neopixel.NeoPixel(pin2, 1) # Neopixel LED on pin 2
 
 uart.init(baudrate=9600)
 
@@ -42,16 +48,35 @@ def serialconnection():
                 display.scroll("Zone: {}, Size: {}".format(zone, size))
     
                 uart.write("OK|TABLE_OCCUPIED\n")
+
+            elif command == "THANK_YOU":
+
+                display.scroll("THANK YOU")
+
+                uart.write("OK|THANK_YOU\n")
     
-            elif command == "LED":
+            elif command == "CROWD":
     
-                if value == "GREEN":
+                if value == "LOW":
                     display.show(Image.YES)
+                    np.fill((0, 255, 0)) # green
+                    np.show()
     
-                elif value == "RED":
+                elif value == "CROWDED":
+                    display.show(Image('00000:'
+                       '09090:'
+                       '00000:'
+                       '99999:'
+                       '00000')) # no expression face
+                    np.fill((255, 165, 0)) # orange
+                    np.show()
+    
+                elif value == "FULL":
                     display.show(Image.NO)
+                    np.fill((255, 0, 0)) # red
+                    np.show()
     
-                uart.write("OK|LED\n")
+                uart.write("OK|CROWD\n")
     
             else:
     
@@ -59,9 +84,9 @@ def serialconnection():
 
 def runfan():
     if distance_sensor.get_distance() < 25:
-        pin2.write_digital(1)
+        pin16.write_digital(1)
     else:
-        pin2.write_digital(0)
+        pin16.write_digital(0)
 
 while True:
     serialconnection()
