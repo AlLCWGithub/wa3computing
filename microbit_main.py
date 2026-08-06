@@ -1,12 +1,12 @@
 from microbit import *
-import distance
+#import distance
 import neopixel
 # MICROBIT PROJECT
 # Pin 1: Ultrasonic Distance Sensor
 # Pin 2: LED Bulb
 # Pin 16: Fan
 
-distance_sensor = distance.DISTANCE(pin1) # Distance sensor on pin 1
+#distance_sensor = distance.DISTANCE(pin1) # Distance sensor on pin 1
 np = neopixel.NeoPixel(pin2, 1) # Neopixel LED on pin 2
 
 uart.init(baudrate=9600)
@@ -17,6 +17,7 @@ display.scroll("READY")
 
 
 def serialconnection():
+    global buffer # use global buffer to store incoming data from PC and to prevent that error of "buffer" being undefined
     data = uart.read() 
     
     if data:
@@ -82,12 +83,12 @@ def serialconnection():
     
                 uart.write("ERROR|Unknown command\n")
 
-def runfan():
-    if distance_sensor.get_distance() < 25:
-        pin16.write_digital(1)
-    else:
-        pin16.write_digital(0)
+# def runfan():
+#     if distance_sensor.get_distance() < 25:
+#         pin16.write_digital(1)
+#     else:
+#         pin16.write_digital(0)
 
 while True:
     serialconnection()
-    runfan()
+    #runfan()
