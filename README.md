@@ -21,3 +21,4 @@ python pc_main.py
 
 Flash the micro:bit:
 uflash microbit_main.py
+ufs put distance.py  -> to run the ultrasonic distance sensor to run the fan
