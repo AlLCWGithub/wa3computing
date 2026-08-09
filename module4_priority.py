@@ -12,6 +12,7 @@ def join_priority_queue(priority_queue, table_size, next_queue_number):
     print(f"Queue Number {next_queue_number} added to {table_size}-seater priority queue")
     return next_queue_number + 1 # this increments the next queue number for the next customer
 
+# calculate the priority waiting time (the difference is that it only looks at the priority queue, not the normal queue)
 def priority_waiting_time(tables_per_table_type, priority_queue, table_size):
     avg_dining_duration = 30 # how long a customer takes to eat in minutes
     queue_length = len(priority_queue[table_size])

@@ -3,7 +3,7 @@
 # Import Module 3 for the updating of queue when a table is unoccupied:
 from module3_queue import call_next_customer
 
-# Display the number of tables 
+# Display the number of tables and calculate the "best" zone
 def display_tables(zones):
     
     # Used to calculate the most vacant (best) zone

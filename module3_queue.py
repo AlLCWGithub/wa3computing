@@ -1,5 +1,6 @@
 # Module 3: Queue and Waiting Time Estimator
 
+# Join the queue and update the queue number for the next customer
 def join_queue(queue, table_size, next_queue_number):
     queue[table_size].append(next_queue_number) # append the queue number into the queue dictionary
 
@@ -41,7 +42,9 @@ def call_next_customer(zones, zone, priority_queue, queue, table_size):
         # this means that the customer queueing has replaced the person who exited.
         zones[zone][table_size] -= 1 
 
-# this function is the first part to calculate the total number of tables per table size (regardless of zones)
+# this function is the first part to calculate the estimated waiting time
+# it calculates the total number of tables per table size (regardless of zones)
+# this function is used in pc_main.py
 def count_table_type(max_tables):
 
     # Stores total number of each table type
@@ -71,6 +74,7 @@ def waiting_time(tables_per_table_type, priority_queue, queue, table_size):
     estimated_waiting_time = round(estimated_waiting_time)
     print(f"Estimated waiting time: {estimated_waiting_time} minutes")
 
+# This function allows a customer to leave the queue if they change their mind
 def leave_queue(queue, priority_queue, table_size, queue_number):
     if queue_number in queue[table_size]:
         queue[table_size].remove(queue_number)

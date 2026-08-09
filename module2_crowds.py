@@ -1,6 +1,6 @@
 # Module 2: Crowd Level Indicators
 
-# Count the total number of tables
+# This function calculates the occupancy percentage of tables
 def occupancy_percentage(max_tables, zones):
     # total calculates the number of tables in the hawker centre
     total = 0
