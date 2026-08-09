@@ -1,7 +1,7 @@
 import module1_tables as module1_tables
 import module2_crowds as module2_crowds
 import module3_queue as module3_queue
-import module5_priority as module5_priority
+import module4_priority as module4_priority
 from serial_connection import SerialConnection
 import time
 
@@ -109,8 +109,8 @@ while True:
 
                 else: # if in priority queue:
                     print(f"Your queue number: {queue_numbers[table_size]}")
-                    queue_numbers[table_size] = module5_priority.join_priority_queue(priority_queue, table_size, queue_numbers[table_size])
-                    module5_priority.priority_waiting_time(tables_per_table_type, priority_queue, table_size)
+                    queue_numbers[table_size] = module4_priority.join_priority_queue(priority_queue, table_size, queue_numbers[table_size])
+                    module4_priority.priority_waiting_time(tables_per_table_type, priority_queue, table_size)
 
             else: # if they dont wanna queue
                 print("Ok you are not in the queue. Sorry for the inconvenience as you'll have to eat somewhere else. :(")
@@ -128,6 +128,14 @@ while True:
         ) # Send thank you for visiting message to microbit
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
+    elif enter_or_exit == "4":
+        while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validqueue):
+            print("Invalid Table Size!")
+        table_size = int(table_size)
+        while ((queue_number := input("Enter your queue number: ").strip()) not in validqueue):
+            print("Invalid Queue Number!")
+        queue_number = int(queue_number)
+        module3_queue.leave_queue(queue, priority_queue, table_size, queue_number)
 
     elif enter_or_exit == secretkey: # this is for employees when they close the application.
         print("Store closed.")

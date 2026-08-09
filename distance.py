@@ -2,7 +2,6 @@ from microbit import *
 from time import sleep_us
 from machine import time_pulse_us
 
-
 class DISTANCE(object):
     """基本描述
 

@@ -70,3 +70,13 @@ def waiting_time(tables_per_table_type, priority_queue, queue, table_size):
     estimated_waiting_time = (queue_length / total_tables_of_table_size) * avg_dining_duration
     estimated_waiting_time = round(estimated_waiting_time)
     print(f"Estimated waiting time: {estimated_waiting_time} minutes")
+
+def leave_queue(queue, priority_queue, table_size, queue_number):
+    if queue_number in queue[table_size]:
+        queue[table_size].remove(queue_number)
+        print(f"Queue Number {queue_number} has left the {table_size}-seater queue")
+    elif queue_number in priority_queue[table_size]:
+        priority_queue[table_size].remove(queue_number)
+        print(f"Priority Queue Number {queue_number} has left the {table_size}-seater priority queue")
+    else:
+        print(f"Queue Number {queue_number} not found in the queue.")
