@@ -2,7 +2,25 @@
 This is repo for wa3computing
 
 # WA3 Computing Project
+How our project works:
+Main files:
+pc_main.py (runs the display on the pc)
+serial_connection.py (connects the pc to the microbit using pyserial)
+microbit_main.py (runs the microbit)
+Modules:
+module1_tables.py
+module2_crowds.py
+module3_queue.py
+module4_priority.py
+Other files:
+distance.py (for ultrasonic distance sensor)
+project_flowchart.md (flowchart of problem decomposition)
 
+
+PLAN B - Our code had tons of errors while trying to connect the pc to the microbit, so we ended up creating another file (which is a microbit-only version) just incase our project really did not work. (It still worked after some debugging): [run this code if really cannot run the actual project]
+MicrobitOnlyCode.py
+
+# Setting up the project
 ## First-time setup (refer to how_to_use_requirements.txt)
 1. Clone the repository.
 2. Create a virtual environment:
@@ -14,7 +32,7 @@ This is repo for wa3computing
 4. Install dependencies:
    python -m pip install -r requirements.txt
 
-## Running the project (incomplete)
+## Running the project
 
 PC program:
 python pc_main.py
