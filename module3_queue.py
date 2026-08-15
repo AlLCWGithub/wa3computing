@@ -2,7 +2,7 @@
 
 # Join the queue and update the queue number for the next customer
 def join_queue(queue, table_size, next_queue_number):
-    queue[table_size].append(next_queue_number) # append the queue number into the queue dictionary
+    queue[table_size].append(next_queue_number) 
 
     print(f"Queue Number {next_queue_number} added to {table_size}-seater queue")
     return next_queue_number + 1 # this increments the next queue number for the next customer
@@ -25,21 +25,13 @@ def call_next_customer(zones, zone, priority_queue, queue, table_size):
         return
     elif len(priority_queue[table_size]) != 0:
         customer_number = priority_queue[table_size][0] # assigns the current customer to be called
-        # let the customer queueing in
-        print(f"\nNow serving Priority Queue Number {customer_number}")
-        # then remove them from the queue
+        print(f"\nNow serving Priority Queue Number {customer_number}: Zone: {zone}, Table Size: {table_size}")
         priority_queue[table_size].pop(0)
-
-        # this means that the customer queueing has replaced the person who exited.
         zones[zone][table_size] -= 1 
-    else: # else it means there is no one in the priority queue so carry on with normal queue
+    else: 
         customer_number = queue[table_size][0] # assigns the current customer to be called
-        # let the customer queueing in
-        print(f"\nNow serving Queue Number {customer_number}")
-        # then remove them from the queue
+        print(f"\nNow serving Queue Number {customer_number}: Zone: {zone}, Table Size: {table_size}")
         queue[table_size].pop(0) 
-
-        # this means that the customer queueing has replaced the person who exited.
         zones[zone][table_size] -= 1 
 
 # this function is the first part to calculate the estimated waiting time
