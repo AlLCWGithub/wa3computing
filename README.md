@@ -1,23 +1,21 @@
-# wa3computing
-This is repo for wa3computing
-
 # WA3 Computing Project
-How our project works:
-Main files:
-pc_main.py (runs the display on the pc)
-serial_connection.py (connects the pc to the microbit using pyserial)
-microbit_main.py (runs the microbit)
-Modules:
-module1_tables.py
-module2_crowds.py
-module3_queue.py
-module4_priority.py
-Other files:
-distance.py (for ultrasonic distance sensor)
-project_flowchart.md (flowchart of problem decomposition)
+How our project works:\
+Main files:\
+pc_main.py (runs the display on the pc)\
+serial_connection.py (connects the pc to the microbit using pyserial)\
+microbit_main.py (runs the microbit)\
+Modules:\
+module1_tables.py\
+module2_crowds.py\
+module3_queue.py\
+module4_priority.py\
+Other files:\
+distance.py (for ultrasonic distance sensor)\
+project_flowchart.md (flowchart of problem decomposition)\
+tests.py (testcases including normal, boundary, error test cases)
 
 
-PLAN B - Our code had tons of errors while trying to connect the pc to the microbit, so we ended up creating another file (which is a microbit-only version) just incase our project really did not work. (It still worked after some debugging): [run this code if really cannot run the actual project]
+If really cannot connect the pc to microbit, our plan B file:\
 MicrobitOnlyCode.py
 
 # Setting up the project
