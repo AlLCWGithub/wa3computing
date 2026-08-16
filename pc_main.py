@@ -24,12 +24,6 @@ zones = {
    "C": {2: 6, 4: 5, 6: 4, 8: 2}
 }
 
-# Pengu's Hawker Centre Prototype Box
-# zones = {
-#    "A": {2: 0, 4: 0, 6: 2, 8: 0},
-#    "B": {2: 4, 4: 1, 6: 0, 8: 0},
-#    "C": {2: 2, 4: 0, 6: 0, 8: 1}
-#}
 
 max_tables = {
     "A": {2: 5, 4: 8, 6: 3, 8: 2},
@@ -161,6 +155,7 @@ while True:
 
     elif enter_or_exit == secretkey: # this is for employees when they close the application.
         print("Store closed.")
+        connection.send("END", "")
         break
 
     time.sleep(5) # this is to give the user time to read the output before clearing the screen

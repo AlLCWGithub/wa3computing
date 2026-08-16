@@ -39,11 +39,13 @@ def serialconnection():
             if command == "CROWD": # command to display the LED
     
                 if value == "LOW":
-                    display.show(Image.YES)
+                    np.clear()
+                    display.show(Image.HAPPY)
                     np.fill((0, 255, 0)) # green
                     np.show()
     
                 elif value == "CROWDED":
+                    np.clear()
                     display.show(Image('00000:'
                         '09090:'
                         '00000:'
@@ -53,11 +55,16 @@ def serialconnection():
                     np.show()
     
                 elif value == "FULL":
-                    display.show(Image.NO)
+                    np.clear()
+                    display.show(Image.SAD)
                     np.fill((255, 0, 0)) # red
                     np.show()
 
                 uart.write("OK|CROWD\n")
+
+            elif command == "END": # end program
+                np.clear()
+                uart.write("OK|END\n")
 
             else:
                 uart.write("ERROR|Unknown command\n")

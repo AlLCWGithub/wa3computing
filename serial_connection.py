@@ -16,6 +16,7 @@ class Packet:
 
 class SerialConnection:
 
+    # Please change the port to the port of the microbit
     def __init__(self, port="COM4", baudrate=9600):
 
         self.ser = serial.Serial(port, baudrate, timeout=0.1)
@@ -34,7 +35,7 @@ class SerialConnection:
 
         self.ser.write(packet.encode())
 
-        print("[PC -> micro:bit]", packet.strip())
+        # print("[PC -> micro:bit]", packet.strip())
 
     def receive(self):
 
@@ -50,7 +51,7 @@ class SerialConnection:
 
         line = line.strip()
 
-        print("[micro:bit -> PC]", line)
+        # print("[micro:bit -> PC]", line)
 
         if "|" not in line:
             return Packet(line, "")
