@@ -36,27 +36,7 @@ def serialconnection():
     
             command, value = line.split("|", 1)
     
-            if command == "SCROLL":
-    
-                display.scroll(value)
-    
-                uart.write("OK|SCROLL\n")
-    
-            elif command == "TABLE_OCCUPIED":
-    
-                zone, size = value.split("|")
-    
-                display.scroll("Zone: {}, Size: {}".format(zone, size))
-    
-                uart.write("OK|TABLE_OCCUPIED\n")
-
-            elif command == "THANK_YOU":
-
-                display.scroll("THANK YOU")
-
-                uart.write("OK|THANK_YOU\n")
-    
-            elif command == "CROWD":
+            if command == "CROWD": # command to display the LED
     
                 if value == "LOW":
                     display.show(Image.YES)
@@ -76,11 +56,10 @@ def serialconnection():
                     display.show(Image.NO)
                     np.fill((255, 0, 0)) # red
                     np.show()
-    
+
                 uart.write("OK|CROWD\n")
-    
+
             else:
-    
                 uart.write("ERROR|Unknown command\n")
 
 def runfan():

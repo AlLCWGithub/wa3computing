@@ -113,7 +113,6 @@ while True:
 
         # If the table size is available, occupy the table
         if zones[preferred_zone][table_size] != 0: 
-            connection.send("TABLE_OCCUPIED", f"{preferred_zone}|{table_size}")
             module1_tables.occupy_table(zones, preferred_zone, table_size)
 
         # otherwise it means that the table size they want is already occupied.
@@ -149,7 +148,6 @@ while True:
         while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validtablesizes):
             print("Invalid Table Size!")
         table_size = int(table_size)
-        connection.send("THANK_YOU","") # Send thank you for visiting message to microbit
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
     # LEAVE QUEUE
