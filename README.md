@@ -14,10 +14,6 @@ distance.py (for ultrasonic distance sensor)\
 project_flowchart.md (flowchart of problem decomposition)\
 tests.py (testcases including normal, boundary, error test cases)
 
-
-If really cannot connect the pc to microbit, our plan B file:\
-MicrobitOnlyCode.py
-
 # Setting up the project
 ## First-time setup (refer to how_to_use_requirements.txt)
 1. Clone the repository.
