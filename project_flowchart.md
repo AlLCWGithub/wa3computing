@@ -1,4 +1,5 @@
 # Smart Hawker Centre – Module Flowchart Summary (Problem Decomposition)
+This is the flowcharts for each function of the program.
 
 ## Module 1: Table Counter and Table Zones
 
@@ -8,7 +9,7 @@
 START
   |
   v
-Read all zones
+Variables for best zone and total
   |
   v
 For each zone:
@@ -100,7 +101,7 @@ END
 START
   |
   v
-percentage = occupancy_percentage(...)
+Get percentage from occupancy_percentage
   |
   v
 Print occupancy percentage
