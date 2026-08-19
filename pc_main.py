@@ -97,6 +97,7 @@ while True:
     if enter_or_exit == "1" or enter_or_exit == "2":
         module1_tables.display_tables(zones)
         crowd_level = module2_crowds.crowd_indicator(max_tables, zones)
+
         connection.send("CROWD", crowd_level) # send the crowd level to microbit to display on LED
 
         while ((preferred_zone := input("Enter your preferred zone (A, B, C): ").strip().upper()) not in validzones):
@@ -116,6 +117,7 @@ while True:
 
             # ask if they wanna queue or no
             wannaqueue = input("Do you want to queue? (Y/N)")
+
             if wannaqueue == "Y":
                 if enter_or_exit == "1": # if in normal queue:
                     print(f"Your queue number: {queue_numbers[table_size]}")
@@ -142,6 +144,7 @@ while True:
         while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validtablesizes):
             print("Invalid Table Size!")
         table_size = int(table_size)
+
         module1_tables.unoccupy_table(zones, max_tables, zone, table_size, queue, priority_queue)
 
     # LEAVE QUEUE
@@ -149,8 +152,10 @@ while True:
         while ((table_size := input("Enter your table size (2, 4, 6, 8): ").strip()) not in validtablesizes):
             print("Invalid Table Size!")
         table_size = int(table_size)
+
         queue_number = input("Enter your queue number: ") # Input validation is unnecessary as the function leave_queue already checks if the queue number is in the queue or not.
         queue_number = int(queue_number)
+
         module3_queue.leave_queue(queue, priority_queue, table_size, queue_number)
 
     elif enter_or_exit == secretkey: # this is for employees when they close the application.

@@ -17,6 +17,7 @@ def display_tables(zones):
         for table_size in zones[zone]:
            
             zone_total += zones[zone][table_size]
+            
         print(f"Zone {zone}: {zone_total} tables available") # Print the number of vacant seats for each zone.
                                                              # e.g. Zone A: 10 tables available
                                                              #      Zone B: 20 tables available

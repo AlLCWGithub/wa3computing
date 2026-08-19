@@ -72,6 +72,7 @@ def serialconnection():
 def runfan():
     if distance_sensor.get_distance() < 25:
         pin16.write_digital(1)
+        
     else:
         pin16.write_digital(0)
 
